@@ -33,7 +33,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     @Transactional
     public void save(Categoria categoria) {
-        categoriaDao.delete(categoria);
+        categoriaDao.save(categoria);
     }
 
     @Override
