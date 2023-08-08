@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @RequestMapping("/registro")
 public class RegistroController {
-
+    
     @Autowired
     private RegistroService registroService;
 

@@ -13,12 +13,14 @@
                 <a th:href="@{/}" class="btn btn-primary">
                     <i class='fas fa-reply'></i> [[#{accion.regresar}]]</a>
             </div>
+            <!--Se aplican todos los metodos definidos en ReporteController-->
             <div class="row"></div>
             <div class="row row-cols-3">
                 <div class="card">
                     <div class="card-header text-center">
-                        Reporte Cientes
+                        Reporte Clientes
                     </div>
+                    <!--Codigo para mostrar el reporte de usuarios-->
                     <div class="card-body">
                         <a th:href="@{/reportes/usuarios?tipo=vPdf}" class="btn btn-primary">
                             <i class='fas fa-eye'></i><i class='fas fa-file-pdf'></i>
@@ -36,8 +38,9 @@
                 </div>
                 <div class="card">
                     <div class="card-header text-center">
-                        Reporte ventas
+                        Reporte Ventas
                     </div>
+                    <!--Codigo para mostrar el reporte de ventas-->
                     <div class="card-body">
                         <a th:href="@{/reportes/ventas?tipo=vPdf}" class="btn btn-primary">
                             <i class='fas fa-eye'></i><i class='fas fa-file-pdf'></i>
@@ -52,10 +55,31 @@
                             <i class='fas fa-download'></i><i class='fas fa-file-csv'></i>
                         </a>
                     </div>
-                </div>                
+                </div>   
+                <!--Codigo para mostrar el reporte del inventario-->
                 <div class="card">
                     <div class="card-header text-center">
-                        Ventas totales
+                        Reporte Inventario
+                    </div>
+                    <div class="card-body">
+                        <a th:href="@{/reportes/inventario?tipo=vPdf}" class="btn btn-primary">
+                            <i class='fas fa-eye'></i><i class='fas fa-file-pdf'></i>
+                        </a>
+                        <a th:href="@{/reportes/inventario?tipo=Pdf}" class="btn btn-success">
+                            <i class='fas fa-download'></i><i class='fas fa-file-pdf'></i>
+                        </a>
+                        <a th:href="@{/reportes/inventario?tipo=Xls}" class="btn btn-warning">
+                            <i class='fas fa-download'></i><i class='fas fa-file-excel'></i>
+                        </a>
+                        <a th:href="@{/reportes/inventario?tipo=Csv}" class="btn btn-danger">
+                            <i class='fas fa-download'></i><i class='fas fa-file-csv'></i>
+                        </a>
+                    </div>
+                </div>
+                <!--Codigo para mostrar el reporte de las ventas totales-->
+                <div class="card">
+                    <div class="card-header text-center">
+                        Ventas Totales
                     </div>
                     <div class="card-body">
                         <div class="card-header">
@@ -65,7 +89,8 @@
                             <form method="GET"
                                   th:action="@{/reportes/ventasTotales}" 
                                   class="was-validated">
-
+                                <!--Se le pide al usuario ingresar las fechas en las cuales
+                                quiere ver las ventas totales-->
                                 <div class="mb-3">
                                     <label for="fechaInicio">Fecha Inicio</label>
                                     <input type="date" class="form-control" 
@@ -106,9 +131,53 @@
                         </div>
                     </div>
                 </div>
+                <!--Codigo para mostrar el reporte de el inventario de una categoria especifico-->
+                <div class="card">
+                    <div class="card-header text-center">
+                        Inventario Producto
+                    </div>
+                    <div class="card-body">
+                        <div class="card-header">
+                            <h4>Inventario Producto</h4>
+                        </div>
+                        <div class="card-body">
+                            <form method="GET"
+                                  th:action="@{/reportes/inventarioProducto}" 
+                                  class="was-validated">
+                                <!--Se le pide al usuario digitar la categoria a la cual se le quiere realizar el reporte-->
+                                <div class="mb-3">
+                                    <label for="categoriaParam">Digite la categoria a reportar:</label>
+                                    <input type="text" class="form-control" name="categoriaParam" th:value="${categoriaParam}" required="false" />
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3 d-grid">
+                                        <button name="tipo" value="vPdf" type="submit" class="btn btn-primary">
+                                            <i class='fas fa-eye'></i><i class='fas fa-file-pdf'></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3 d-grid">
+                                        <button name="tipo" value="Pdf" type="submit" class="btn btn-success">
+                                            <i class='fas fa-download'></i><i class='fas fa-file-pdf'></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3 d-grid">
+                                        <button name="tipo" value="Xls" type="submit" class="btn btn-warning">
+                                            <i class='fas fa-download'></i><i class='fas fa-file-excel'></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3 d-grid">
+                                        <button name="tipo" value="Xls" type="submit" class="btn btn-danger">
+                                            <i class='fas fa-download'></i><i class='fas fa-file-csv'></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
         <footer th:replace="~{layout/plantilla :: footer}"/>         
     </body>
 </html>

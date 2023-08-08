@@ -8,6 +8,8 @@
         <title>TechShop</title>
     </head>
     <body>
+        <!--Se implementan todos los metodos definidos en ProductoController para hacer el respectivo CRUD
+        Agregar Productos, Eliminar Productos, Editar Productos y Mostrar las Productos-->
         <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
         <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
             <div class="container" sec:authorize="hasRole('ROLE_ADMIN')">

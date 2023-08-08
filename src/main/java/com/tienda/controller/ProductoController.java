@@ -19,7 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @RequestMapping("/producto")
 public class ProductoController {
-    
+    //Se crea el crud para agregar, eliminar y editar los productos
+    //Se mapean el id de las categorias para poder agregar el producto a cada categoria
     @Autowired
     private ProductoService productoService;
     @Autowired

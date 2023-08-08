@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/reportes")
 public class ReporteController {
-
+    //Controller para visualizar los reportes
     @Autowired
     ReporteService reporteService;
 
@@ -29,29 +29,37 @@ public class ReporteController {
         String strMes = (fecha.get(Calendar.MONTH) < 10 ? "0" : "")
                 + fecha.get(Calendar.MONTH);
 
-        String strDia = (fecha.get(Calendar.DAY_OF_MONTH)< 10 ? "0" : "")
+        String strDia = (fecha.get(Calendar.DAY_OF_MONTH) < 10 ? "0" : "")
                 + fecha.get(Calendar.DAY_OF_MONTH);
 
-        String fechaFin=""+fecha.get(Calendar.YEAR)+"-"+strMes+"-"+strDia;
+        String fechaFin = "" + fecha.get(Calendar.YEAR) + "-" + strMes + "-" + strDia;
 
-        model.addAttribute("fechaInicio",fechaIni);
-        model.addAttribute("fechaFin",fechaFin);
+        model.addAttribute("fechaInicio", fechaIni);
+        model.addAttribute("fechaFin", fechaFin);
         return "/reportes/principal";
     }
-     
+
     @GetMapping("/usuarios")
     public ResponseEntity<Resource> reporteClientes(@RequestParam String tipo)
             throws IOException {
         var reporte = "usuarios";
         return reporteService.generaReporte(reporte, null, tipo);
     }
+
     @GetMapping("/ventas")
     public ResponseEntity<Resource> reporteVentas(@RequestParam String tipo)
             throws IOException {
         var reporte = "ventas";
         return reporteService.generaReporte(reporte, null, tipo);
     }
-    
+
+    @GetMapping("/inventario")
+    public ResponseEntity<Resource> reporteInventario(@RequestParam String tipo)
+            throws IOException {
+        var reporte = "inventario";
+        return reporteService.generaReporte(reporte, null, tipo);
+    }
+
     @GetMapping("/ventasTotales")
     public ResponseEntity<Resource> reporteVentasTotales(
             @RequestParam String fechaInicio,
@@ -61,7 +69,19 @@ public class ReporteController {
         Map<String, Object> parametros = new HashMap();
         parametros.put("fechaInicio", fechaInicio);
         parametros.put("fechaFin", fechaFin);
-        var reporte="ventasTotales";
+        var reporte = "ventasTotales";
         return reporteService.generaReporte(reporte, parametros, tipo);
     }
+
+    @GetMapping("/inventarioProducto")
+    public ResponseEntity<Resource> reporteInventarioProducto(
+            @RequestParam(required = false) String categoriaParam,
+            @RequestParam String tipo) throws IOException {
+        //Se define que la categoria que se va a mostrar es la que solicite el usuario
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("categoriaParam", categoriaParam);
+        var reporte = "inventarioProducto";
+        return reporteService.generaReporte(reporte, parametros, tipo);
+    }
+
 }

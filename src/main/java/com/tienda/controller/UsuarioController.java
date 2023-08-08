@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
-
+    //Se crea el crud para agregar, eliminar y editar los usuarios
     @Autowired
     private UsuarioService usuarioService;
 

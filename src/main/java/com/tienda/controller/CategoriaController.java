@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @RequestMapping("/categoria")
 public class CategoriaController {
-    
+    //Se crea el crud para agregar, eliminar y editar las categorias
     @Autowired
     private CategoriaService categoriaService;
 
